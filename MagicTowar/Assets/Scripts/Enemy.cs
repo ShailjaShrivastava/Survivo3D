@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
@@ -13,6 +13,7 @@ public class Enemy : MonoBehaviour
     private Transform target; // Reference to the target (Tower)
     private Rigidbody rb; // Reference to Rigidbody component for movement
     public GameObject CoinPrefab;
+    public Slider healthBarImage; 
 
     void Start()
     {
@@ -34,7 +35,7 @@ public class Enemy : MonoBehaviour
    public void Update()
     {
         MoveTowardsTarget();
-
+         healthBarImage.value = health;
         if (health <= 0)
         {
             Die();

@@ -26,7 +26,7 @@ public class Tower : MonoBehaviour
     public float moveSpeed;
     public JoyStick jS;
     private Vector3 moveVector;
-    public float RadiusofAttack;
+    public float RadiusofAttack = Mathf.Infinity;
     void Start()
     {
         health = maxHealth;
@@ -34,7 +34,7 @@ public class Tower : MonoBehaviour
         currentAttackRate = baseAttackRate;
         healthBar = GetComponentInChildren<HealthBar>();
         gm =  FindObjectOfType<GameManager>();
-        RadiusofAttack = Mathf.Infinity;
+       RadiusofAttack = Mathf.Infinity;
       
     }
 
@@ -70,8 +70,8 @@ public class Tower : MonoBehaviour
         // Optional: Visualize damage taken (e.g., change material, play sound)
         if (health <= 0)
         {
-          //  Destroy(this.gameObject);
-         //   gm.GameOver();
+            Destroy(this.gameObject);
+            gm.GameOver();
         }
     }
 
@@ -128,15 +128,7 @@ public class Tower : MonoBehaviour
     }
 
 
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Coin"))
-        {
-            
-            // Apply area-of-effect damage if applicable
-            // Destroy projectile (or handle persistence)
-        }
-    }
+
 
 
     void OnCollisionEnter(Collision collision)
