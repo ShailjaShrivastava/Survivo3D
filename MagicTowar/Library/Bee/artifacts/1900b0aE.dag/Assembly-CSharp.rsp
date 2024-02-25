@@ -354,6 +354,7 @@
 "Assets/Scripts/CameraFollow.cs"
 "Assets/Scripts/CoinScripts.cs"
 "Assets/Scripts/Enemy.cs"
+"Assets/Scripts/EnemyProjectile.cs"
 "Assets/Scripts/GameManager.cs"
 "Assets/Scripts/HealthBar.cs"
 "Assets/Scripts/JoyStick.cs"

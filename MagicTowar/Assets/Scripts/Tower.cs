@@ -70,7 +70,7 @@ public class Tower : MonoBehaviour
         // Optional: Visualize damage taken (e.g., change material, play sound)
         if (health <= 0)
         {
-            Destroy(this.gameObject);
+           Destroy(this.gameObject);
             gm.GameOver();
         }
     }
