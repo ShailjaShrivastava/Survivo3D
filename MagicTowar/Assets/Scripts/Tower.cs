@@ -22,6 +22,11 @@ public class Tower : MonoBehaviour
     private HealthBar healthBar; // Reference to UI health bar component
     private     Enemy closestEnemy ;
     private GameManager gm;
+
+    public float moveSpeed;
+    public JoyStick jS;
+    private Vector3 moveVector;
+    public float RadiusofAttack;
     void Start()
     {
         health = maxHealth;
@@ -29,11 +34,25 @@ public class Tower : MonoBehaviour
         currentAttackRate = baseAttackRate;
         healthBar = GetComponentInChildren<HealthBar>();
         gm =  FindObjectOfType<GameManager>();
+        RadiusofAttack = Mathf.Infinity;
       
+    }
+
+
+
+        private void move()
+    {
+        transform.Translate(moveVector * moveSpeed * Time.deltaTime, Space.World);
     }
 
     void Update()
     {
+
+        moveVector.x = jS.Horizontal();
+        moveVector.z = jS.Vertical();
+        move();
+
+
         if (Time.time >= nextAttackTime && mana > 0)
         {
             closestEnemy = GetClosestEnemy();
@@ -51,8 +70,8 @@ public class Tower : MonoBehaviour
         // Optional: Visualize damage taken (e.g., change material, play sound)
         if (health <= 0)
         {
-            Destroy(this.gameObject);
-            gm.GameOver();
+          //  Destroy(this.gameObject);
+         //   gm.GameOver();
         }
     }
 
@@ -81,7 +100,7 @@ public class Tower : MonoBehaviour
     {
         // Find the closest enemy within range
     
-        float minDistance = Mathf.Infinity;
+        float minDistance = RadiusofAttack;
         foreach (Enemy enemy in gm.enemies)
     //  for(int i = 0 ; i < GameManager.instance.enemies.Count ; i++ )
         {
@@ -107,4 +126,27 @@ public class Tower : MonoBehaviour
         // Replenish mana
         mana = Mathf.Min(mana + amount, maxMana);
     }
+
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Coin"))
+        {
+            
+            // Apply area-of-effect damage if applicable
+            // Destroy projectile (or handle persistence)
+        }
+    }
+
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Coin"))
+        {
+         Destroy(collision.gameObject);
+        }
+    }
+
+
+
 }

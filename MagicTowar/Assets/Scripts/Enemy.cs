@@ -12,6 +12,7 @@ public class Enemy : MonoBehaviour
 
     private Transform target; // Reference to the target (Tower)
     private Rigidbody rb; // Reference to Rigidbody component for movement
+    public GameObject CoinPrefab;
 
     void Start()
     {

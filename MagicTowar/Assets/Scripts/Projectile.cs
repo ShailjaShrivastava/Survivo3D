@@ -33,6 +33,8 @@ public class Projectile : MonoBehaviour
         {
             Enemy enemy = other.GetComponent<Enemy>();
             enemy.Damage(damage);
+            enemy.CoinPrefab.SetActive(true);
+            enemy.CoinPrefab.transform.SetParent(null);
              Destroy(gameObject); 
             // Apply area-of-effect damage if applicable
             // Destroy projectile (or handle persistence)
